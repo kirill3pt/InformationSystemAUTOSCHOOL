@@ -1,0 +1,136 @@
+﻿using System;
+using ClosedXML.Excel;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+using DocumentFormat.OpenXml.Spreadsheet;
+
+namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
+{
+    public class XLSX_FUNC_STUDENTS
+    {
+        public string filePath = "Ученики.xlsx";
+        string[] headers = { "ID", "ФИО", "Телефон", "Группа", "Статус", "Оплата" };
+        public void CREATE()
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var ws = workbook.Worksheets.Add("Ученики");
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    ws.Cell(1, i + 1).Value = headers[i];
+                    ws.Column(i + 1).Width = 20;
+                }
+                workbook.SaveAs(filePath);
+            }
+        }
+        public void SAVE(string fio, string phone, string group, string paid)
+        {
+            if (!File.Exists(filePath))
+            {
+                CREATE();
+            }
+            using (var workbook = new XLWorkbook(filePath))
+            {
+                var ws = workbook.Worksheet(1);
+                int lastRow = ws.LastRowUsed()?.RowNumber() + 1 ?? 2;
+                string[] data = { fio, phone, group, paid };
+                ws.Cell(lastRow, 1).Value = lastRow - 1;
+                ws.Cell(lastRow, 2).Value = fio;
+                ws.Cell(lastRow, 3).Value = phone;
+                ws.Cell(lastRow, 4).Value = group;
+                ws.Cell(lastRow, 5).Value = "учится!";
+                ws.Cell(lastRow, 6).Value = paid;
+                workbook.Save();
+            }
+        }
+        public DataTable SHOW()
+        {
+            using (var workbook = new XLWorkbook(filePath))
+            {
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Файл не найден!");
+                    return new DataTable();
+                }
+                try
+                {
+                    DataTable TABLE = new DataTable();
+                    var ws = workbook.Worksheet(1);
+                    for (int i = 0; i < headers.Length; i++)
+                    {
+                        TABLE.Columns.Add(headers[i]);
+                    }
+                    var ROWS = ws.RowsUsed().Skip(1);
+                    foreach (var row in ROWS)
+                    {
+                        DataRow NEWROWS = TABLE.NewRow();
+                        for (int i = 0; i < headers.Length; i++)
+                        {
+                            NEWROWS[i] = row.Cell(i + 1).Value.ToString();
+                        }
+                        TABLE.Rows.Add(NEWROWS);
+                    }
+                    MessageBox.Show("Таблица загружена!");
+                    return TABLE;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}");
+                    return new DataTable();
+                }
+            }
+        }
+        public void MakeCOMBOBOX(ComboBox comboBox)
+        {
+            try
+            {
+                comboBox.Items.Clear();
+                DataTable studentsTABLE = ReadSTUDENTS();
+
+                foreach (DataRow row in studentsTABLE.Rows)
+                {
+                    string fio = row["ФИО"].ToString();
+                    string fioINFO = $"{fio}";
+                    comboBox.Items.Add(fioINFO);
+                }
+
+                if (comboBox.Items.Count > 0)
+                {
+                    comboBox.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки ФИО: {ex.Message}");
+            }
+        }
+        public DataTable ReadSTUDENTS()
+        {
+            DataTable TABLE = new DataTable();
+            foreach (var header in headers)
+            {
+                TABLE.Columns.Add(header);
+            }
+            using (var workbook = new XLWorkbook(filePath))
+            {
+                var ws = workbook.Worksheet(1);
+                var rows = ws.RowsUsed().Skip(1);
+                foreach (var row in rows)
+                {
+                    DataRow newROWS = TABLE.NewRow();
+                    for (int i = 0; i < headers.Length; i++)
+                        newROWS[i] = row.Cell(i + 1).Value.ToString();
+                    TABLE.Rows.Add(newROWS);
+                }
+            }
+            return TABLE;
+        }
+    }
+}
