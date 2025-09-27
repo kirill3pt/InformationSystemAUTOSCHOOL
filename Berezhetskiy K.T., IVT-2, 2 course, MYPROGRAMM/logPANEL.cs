@@ -33,13 +33,18 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     this.Close();
                 }
             }
+            if (passwordBox.Text == RightPASSforINST && loginBox.Text == RightLOGINforINST)
+            {
+               if (UserRoleChoice.Text == "Инструктор")
+               {
+                    ModuleINSTRUCTOR moduleINSTRUCTOR = new ModuleINSTRUCTOR();
+                    moduleINSTRUCTOR.ShowDialog();
+                    this.Close();
+               }
+            }
             else
             {
                 MessageBox.Show("Неправильный логин и/или пароль!");
-            }
-            if (passwordBox.Text == RightPASSforINST && loginBox.Text == RightLOGINforINST)
-            {
-               
             }
         }
     }

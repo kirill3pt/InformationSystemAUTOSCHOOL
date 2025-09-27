@@ -108,6 +108,12 @@
     <Compile Include="addINSTRUCTOR.Designer.cs">
       <DependentUpon>addINSTRUCTOR.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModuleINSTRUCTOR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleINSTRUCTOR.Designer.cs">
+      <DependentUpon>ModuleINSTRUCTOR.cs</DependentUpon>
+    </Compile>
     <Compile Include="XLSX_FUNC_CARS.cs" />
     <Compile Include="XLSX_FUNC_INSTRUCTORS.cs" />
     <Compile Include="XLSX_FUNC_LESSONS.cs" />
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModuleADMIN.resx">
       <DependentUpon>ModuleADMIN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModuleINSTRUCTOR.resx">
+      <DependentUpon>ModuleINSTRUCTOR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -130,8 +130,11 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int lessonId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
-                FunctionXLSXforLessons.statusLESSON(lessonId, "отменено");
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    int lessonId = Convert.ToInt32(row.Cells["ID"].Value);
+                    FunctionXLSXforLessons.statusLESSON(lessonId, "отменено");
+                }
                 dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
             }
         }
@@ -139,8 +142,11 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int lessonId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
-                FunctionXLSXforLessons.statusLESSON(lessonId, "проведено");
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                    int lessonId = Convert.ToInt32(row.Cells["ID"].Value);
+                    FunctionXLSXforLessons.statusLESSON(lessonId, "проведено");
+                }
                 dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
             }
         }
