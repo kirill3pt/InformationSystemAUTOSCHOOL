@@ -47,8 +47,9 @@
             // 
             // DoneBUTTON
             // 
+            this.DoneBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DoneBUTTON.Location = new System.Drawing.Point(140, 421);
+            this.DoneBUTTON.Location = new System.Drawing.Point(631, 421);
             this.DoneBUTTON.Name = "DoneBUTTON";
             this.DoneBUTTON.Size = new System.Drawing.Size(128, 36);
             this.DoneBUTTON.TabIndex = 8;
@@ -59,6 +60,11 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(44, 49);
@@ -70,8 +76,9 @@
             // 
             // CancelBUTTON
             // 
+            this.CancelBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CancelBUTTON.Location = new System.Drawing.Point(44, 421);
+            this.CancelBUTTON.Location = new System.Drawing.Point(535, 421);
             this.CancelBUTTON.Name = "CancelBUTTON";
             this.CancelBUTTON.Size = new System.Drawing.Size(90, 36);
             this.CancelBUTTON.TabIndex = 7;
@@ -166,7 +173,6 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.CancelBUTTON);
             this.Controls.Add(this.toolStrip1);
-            this.MaximumSize = new System.Drawing.Size(854, 527);
             this.MinimumSize = new System.Drawing.Size(854, 527);
             this.Name = "ModuleINSTRUCTOR";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

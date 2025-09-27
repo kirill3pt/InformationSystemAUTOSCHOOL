@@ -86,7 +86,7 @@
             this.fileTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitTSM});
             this.fileTSM.Name = "fileTSM";
-            this.fileTSM.Size = new System.Drawing.Size(131, 22);
+            this.fileTSM.Size = new System.Drawing.Size(180, 22);
             this.fileTSM.Text = "Файл";
             // 
             // exitTSM
@@ -101,7 +101,7 @@
             this.statementTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.make_statementTSM});
             this.statementTSM.Name = "statementTSM";
-            this.statementTSM.Size = new System.Drawing.Size(131, 22);
+            this.statementTSM.Size = new System.Drawing.Size(180, 22);
             this.statementTSM.Text = "Отчёты";
             // 
             // make_statementTSM
@@ -116,7 +116,7 @@
             this.serviceTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsTSM});
             this.serviceTSM.Name = "serviceTSM";
-            this.serviceTSM.Size = new System.Drawing.Size(131, 22);
+            this.serviceTSM.Size = new System.Drawing.Size(180, 22);
             this.serviceTSM.Text = "Сервис";
             // 
             // settingsTSM
@@ -130,7 +130,7 @@
             this.helpTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutTSM});
             this.helpTSM.Name = "helpTSM";
-            this.helpTSM.Size = new System.Drawing.Size(131, 22);
+            this.helpTSM.Size = new System.Drawing.Size(180, 22);
             this.helpTSM.Text = "Помощь";
             // 
             // aboutTSM
@@ -226,9 +226,14 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(44, 56);
+            this.dataGridView1.Location = new System.Drawing.Point(44, 49);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(715, 350);
@@ -237,8 +242,9 @@
             // 
             // CancelBUTTON
             // 
+            this.CancelBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CancelBUTTON.Location = new System.Drawing.Point(44, 428);
+            this.CancelBUTTON.Location = new System.Drawing.Point(535, 428);
             this.CancelBUTTON.Name = "CancelBUTTON";
             this.CancelBUTTON.Size = new System.Drawing.Size(90, 36);
             this.CancelBUTTON.TabIndex = 3;
@@ -249,8 +255,9 @@
             // 
             // DoneBUTTON
             // 
+            this.DoneBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DoneBUTTON.Location = new System.Drawing.Point(140, 428);
+            this.DoneBUTTON.Location = new System.Drawing.Point(631, 428);
             this.DoneBUTTON.Name = "DoneBUTTON";
             this.DoneBUTTON.Size = new System.Drawing.Size(128, 36);
             this.DoneBUTTON.TabIndex = 4;
@@ -268,7 +275,6 @@
             this.Controls.Add(this.CancelBUTTON);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.toolStrip1);
-            this.MaximumSize = new System.Drawing.Size(854, 527);
             this.MinimumSize = new System.Drawing.Size(854, 527);
             this.Name = "ModuleADMIN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
