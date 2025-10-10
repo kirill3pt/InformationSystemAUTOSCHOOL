@@ -15,11 +15,12 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public partial class ModuleADMIN : Form
     {
-        public string otchetPath = "Отчёт.xlsx";
-        public string instuctorsPath = "Инструкторы.xlsx";
-        public string studentsPath = "Ученики.xlsx";
-        public string carsPath = "Автомобили.xlsx";
-        public string lessonsPath = "Занятия.xlsx";
+        private string otchetPath_ = "Отчёт.xlsx";
+        private string instuctorsPath_ = "Инструкторы.xlsx";
+        private string studentsPath_ = "Ученики.xlsx";
+        private string carsPath_ = "Автомобили.xlsx";
+        private string lessonsPath_ = "Занятия.xlsx";
+        private string currentTable_ = "";
         XLSX_FUNC_STUDENTS FunctionsXLSXforStudents = new XLSX_FUNC_STUDENTS();
         XLSX_FUNC_CARS FunctionXLSXforCars = new XLSX_FUNC_CARS();
         XLSX_FUNC_LESSONS FunctionXLSXforLessons = new XLSX_FUNC_LESSONS();
@@ -35,94 +36,52 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         {
             this.Close();
         }
-        private void add_studentsTSM_Click(object sender, EventArgs e)
-        {
-            using (addSTUDENT addStudents = new addSTUDENT())
-            {
-                if (addStudents.ShowDialog() == DialogResult.OK)
-                {
-                    FunctionsXLSXforStudents.SAVE(addStudents.StudentFIO, addStudents.NumberPhone, addStudents.Group, addStudents.Paid);
-                    MessageBox.Show("Ученик добавлен!");
-                }
-            }
-        }
         private void studentsTSM_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
-        }
-        private void add_carsTSM_Click(object sender, EventArgs e)
-        {
-            using (addCARS addCars = new addCARS())
-            {
-                if (addCars.ShowDialog() == DialogResult.OK)
-                {
-                    FunctionXLSXforCars.SAVE(addCars.markaCar, addCars.modelCar, addCars.numberCar, addCars.yearOfCar, addCars.AccessCar);
-                    MessageBox.Show("Автомобиль добавлен!");
-                }
-            }
+            currentTable_ = "students";
         }
         private void carsTSM_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = FunctionXLSXforCars.SHOW();
+            currentTable_ = "cars";
         }
         private void scheduleTSM_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
+            currentTable_ = "lessons";
             if (dataGridView1.Rows.Count > 0)
             {
                 CancelBUTTON.Visible = true;
                 DoneBUTTON.Visible = true;
             }
         }
-        private void add_lessonTSM_Click(object sender, EventArgs e)
-        {
-            using (addLESSON addLesson = new addLESSON())
-            {
-                if (addLesson.ShowDialog() == DialogResult.OK)
-                {
-                    FunctionXLSXforLessons.SAVE(addLesson.Date, addLesson.Time, addLesson.studentFIO, addLesson.instructor, addLesson.car);
-                    MessageBox.Show("Занятие создано!");
-                }
-                dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
-            }
-        }
-        private void add_instructorTSM_Click(object sender, EventArgs e)
-        {
-            using (addINSTRUCTOR addINSTRUCTOR = new addINSTRUCTOR())
-            {
-                if (addINSTRUCTOR.ShowDialog() == DialogResult.OK)
-                {
-                    FunctionXLSXforInstructors.SAVE(addINSTRUCTOR.fioINSTRUCTOR, addINSTRUCTOR.numberINSTRUCTOR);
-                    MessageBox.Show("Инструктор добавлен!");
-                }
-                dataGridView1.DataSource = FunctionXLSXforInstructors.SHOW();
-            }
-        }
         private void instructorsTSM_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = FunctionXLSXforInstructors.SHOW();
+            currentTable_ = "instructors";
         }
         private void make_statementTSM_Click(object sender, EventArgs e)
         {
             using (var workbook = new XLWorkbook())
             {
-                using (var studentsBook = new XLWorkbook(studentsPath))
+                using (var studentsBook = new XLWorkbook(studentsPath_))
                 {
                     studentsBook.Worksheet(1).CopyTo(workbook, "Ученики");
                 }
-                using (var carsBook = new XLWorkbook(carsPath))
+                using (var carsBook = new XLWorkbook(carsPath_))
                 {
                     carsBook.Worksheet(1).CopyTo(workbook, "Автомобили");
                 }
-                using (var instructorsBook = new XLWorkbook(instuctorsPath))
+                using (var instructorsBook = new XLWorkbook(instuctorsPath_))
                 {
                     instructorsBook.Worksheet(1).CopyTo(workbook, "Инструкторы");
                 }
-                using (var lessonsBook = new XLWorkbook(lessonsPath))
+                using (var lessonsBook = new XLWorkbook(lessonsPath_))
                 {
                     lessonsBook.Worksheet(1).CopyTo(workbook, "Занятия");
                 }
-                workbook.SaveAs(otchetPath);
+                workbook.SaveAs(otchetPath_);
                 MessageBox.Show("Отчёт создан!");
             }
         }
@@ -172,6 +131,128 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 {
                     dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
                 }
+            }
+        }
+        private void logFolder_TSM_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    LOGGER.SETLOGFOLDER(dialog.SelectedPath);
+                    MessageBox.Show($"Путь к логам изменён:\n{LOGGER.logFILEPATH_}");
+                }
+            }
+        }
+
+        private void deleteTSM_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите ученика для удаления!");
+                return;
+            }
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
+            FunctionsXLSXforStudents.DELETE(id);
+            dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
+        }
+
+        private void delete_InstuctorTSM_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите ученика для удаления!");
+                return;
+            }
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
+            FunctionXLSXforInstructors.DELETE(id);
+            dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
+        }
+
+        private void buttonADD_Click(object sender, EventArgs e)
+        {
+            switch (currentTable_)
+            {
+                case "students":
+                    using (addSTUDENT form = new addSTUDENT())
+                    {
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FunctionsXLSXforStudents.SAVE(form.StudentFIO, form.NumberPhone, form.Group, form.Paid);
+                            dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
+                            MessageBox.Show("Ученик добавлен!");
+                        }
+                    }
+                    break;
+                case "cars":
+                    using (addCARS form = new addCARS())
+                    {
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FunctionXLSXforCars.SAVE(form.markaCar, form.modelCar, form.numberCar, form.yearOfCar, form.AccessCar);
+                            dataGridView1.DataSource = FunctionXLSXforCars.SHOW();
+                            MessageBox.Show("Автомобиль добавлен!");
+                        }
+                    }
+                    break;
+                case "instructors":
+                    using (addINSTRUCTOR form = new addINSTRUCTOR())
+                    {
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FunctionXLSXforInstructors.SAVE(form.fioINSTRUCTOR, form.numberINSTRUCTOR);
+                            dataGridView1.DataSource = FunctionXLSXforInstructors.SHOW();
+                            MessageBox.Show("Инструктор добавлен!");
+                        }
+                    }
+                    break;
+                case "lessons":
+                    using (addLESSON form = new addLESSON())
+                    {
+                        if (form.ShowDialog() == DialogResult.OK)
+                        {
+                            FunctionXLSXforLessons.SAVE(form.Date, form.Time, form.studentFIO, form.instructor, form.car);
+                            dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
+                            MessageBox.Show("Занятие добавлено!");
+                        }
+                    }
+                    break;
+                default:
+                    MessageBox.Show("Сначала выберите таблицу для добавления данных.");
+                    break;
+            }
+        }
+        private void buttonDELETE_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Выберите запись для удаления!");
+                return;
+            }
+
+            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ID"].Value);
+
+            switch (currentTable_)
+            {
+                case "students":
+                    FunctionsXLSXforStudents.DELETE(id);
+                    dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
+                    break;
+                case "cars":
+                    FunctionXLSXforCars.DELETE(id);
+                    dataGridView1.DataSource = FunctionXLSXforCars.SHOW();
+                    break;
+                case "instructors":
+                    FunctionXLSXforInstructors.DELETE(id);
+                    dataGridView1.DataSource = FunctionXLSXforInstructors.SHOW();
+                    break;
+                case "lessons":
+                    FunctionXLSXforLessons.DELETE(id);
+                    dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
+                    break;
+                default:
+                    MessageBox.Show("Таблица не выбрана.");
+                    break;
             }
         }
     }

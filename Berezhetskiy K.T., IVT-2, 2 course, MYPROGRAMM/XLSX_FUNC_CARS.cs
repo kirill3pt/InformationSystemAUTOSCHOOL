@@ -29,6 +29,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
                 workbook.SaveAs(filePath);
             }
+            LOGGER.LOG("Создан новый файл 'Автомобили.xlsx'");
         }
         public void SAVE(string marka, string model, string number, string year, string access)
         {
@@ -49,6 +50,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 6).Value = access;
                 workbook.Save();
             }
+            LOGGER.LOG($"Добавлен автомобиль: {marka}, {model}, {number}, {year}, {access}");
         }
         public DataTable SHOW()
         {
@@ -133,6 +135,70 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
             }
             return TABLE;
+        }
+        public void DELETE(int id)
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Файл не найден!");
+                    return;
+                }
+                DialogResult confirm = MessageBox.Show(
+                    $"Удалить автомобиль с ID {id}?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (confirm != DialogResult.Yes)
+                {
+                    LOGGER.LOG($"Удаление автомобиля с ID {id} отменено пользователем.");
+                    return;
+                }
+
+                using (var workbook = new XLWorkbook(filePath))
+                {
+                    var ws = workbook.Worksheet(1);
+                    var rows = ws.RowsUsed().Skip(1).ToList();
+                    bool found = false;
+
+                    foreach (var row in rows)
+                    {
+                        int currentId = row.Cell(1).GetValue<int>();
+                        if (currentId == id)
+                        {
+                            row.Delete();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found)
+                    {
+                        int newId = 1;
+                        foreach (var row in ws.RowsUsed().Skip(1))
+                        {
+                            row.Cell(1).Value = newId++;
+                        }
+
+                        workbook.Save();
+                        MessageBox.Show("Автомобиль успешно удалён!");
+                        LOGGER.LOG($"Автомобиль с ID {id} удалён из базы.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Автомобиль с таким ID не найден!");
+                        LOGGER.LOG($"Попытка удалить несуществующего автомобиля ID {id}.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}");
+                LOGGER.LOG($"Ошибка при удалении автомобиля ID {id}: {ex.Message}");
+            }
         }
     }
 }

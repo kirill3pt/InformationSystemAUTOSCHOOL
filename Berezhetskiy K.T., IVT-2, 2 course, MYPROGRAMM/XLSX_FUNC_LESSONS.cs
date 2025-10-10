@@ -29,6 +29,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
                 workbook.SaveAs(filePath);
             }
+            LOGGER.LOG("Создан новый файл 'Занятия.xlsx'");
         }
         public void SAVE(string date, string time, string fio, string instructor, string car, string status = "запланировано")
         {
@@ -40,7 +41,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             {
                 var ws = workbook.Worksheet(1);
                 int lastRow = ws.LastRowUsed()?.RowNumber() + 1 ?? 2;
-                string[] data = { date, time, fio, car};
+                string[] data = { date, time, fio, car };
                 ws.Cell(lastRow, 1).Value = lastRow - 1;
                 ws.Cell(lastRow, 2).Value = date;
                 ws.Cell(lastRow, 3).Value = time;
@@ -50,6 +51,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 7).Value = status;
                 workbook.Save();
             }
+            LOGGER.LOG($"Добавлено занятие: {date} {time}, ученик: {fio}, авто: {car}, статус: {status}");
         }
         public DataTable SHOW()
         {
@@ -114,10 +116,75 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                         }
                         int statusCol = ws.LastColumnUsed().ColumnNumber();
                         row.Cell(statusCol).Value = status;
+                        LOGGER.LOG($"Изменён статус занятия ID={id} → {status}");
                         break;
                     }
                 }
                 workbook.Save();
+            }
+        }
+        public void DELETE(int id)
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Файл не найден!");
+                    return;
+                }
+                DialogResult confirm = MessageBox.Show(
+                    $"Удалить занятие с ID {id}?",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (confirm != DialogResult.Yes)
+                {
+                    LOGGER.LOG($"Удаление занятия с ID {id} отменено пользователем.");
+                    return;
+                }
+
+                using (var workbook = new XLWorkbook(filePath))
+                {
+                    var ws = workbook.Worksheet(1);
+                    var rows = ws.RowsUsed().Skip(1).ToList();
+                    bool found = false;
+
+                    foreach (var row in rows)
+                    {
+                        int currentId = row.Cell(1).GetValue<int>();
+                        if (currentId == id)
+                        {
+                            row.Delete();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (found)
+                    {
+                        int newId = 1;
+                        foreach (var row in ws.RowsUsed().Skip(1))
+                        {
+                            row.Cell(1).Value = newId++;
+                        }
+
+                        workbook.Save();
+                        MessageBox.Show("Занятие успешно удалено!");
+                        LOGGER.LOG($"Занятие с ID {id} удалено из базы.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Занятие с таким ID не найдено!");
+                        LOGGER.LOG($"Попытка удалить несуществующее занятие ID {id}.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении: {ex.Message}");
+                LOGGER.LOG($"Ошибка при удалении занятия ID {id}: {ex.Message}");
             }
         }
     }

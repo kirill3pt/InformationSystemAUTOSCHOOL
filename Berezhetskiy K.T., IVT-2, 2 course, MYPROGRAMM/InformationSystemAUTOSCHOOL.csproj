@@ -108,6 +108,7 @@
     <Compile Include="addINSTRUCTOR.Designer.cs">
       <DependentUpon>addINSTRUCTOR.cs</DependentUpon>
     </Compile>
+    <Compile Include="LOGGER.cs" />
     <Compile Include="ModuleINSTRUCTOR.cs">
       <SubType>Form</SubType>
     </Compile>
