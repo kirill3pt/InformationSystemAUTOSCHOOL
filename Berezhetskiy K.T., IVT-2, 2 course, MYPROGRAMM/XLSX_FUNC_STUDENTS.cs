@@ -55,13 +55,13 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         }
         public DataTable SHOW()
         {
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Файл не найден! Для создания нажмите \"Добавить\" внизу");
+                return new DataTable();
+            }
             using (var workbook = new XLWorkbook(filePath))
             {
-                if (!File.Exists(filePath))
-                {
-                    MessageBox.Show("Файл не найден!");
-                    return new DataTable();
-                }
                 try
                 {
                     DataTable TABLE = new DataTable();

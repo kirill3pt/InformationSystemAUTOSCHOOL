@@ -50,6 +50,7 @@
             this.DoneBUTTON = new System.Windows.Forms.Button();
             this.buttonADD = new System.Windows.Forms.Button();
             this.buttonDELETE = new System.Windows.Forms.Button();
+            this.selectedListLABEL = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -254,11 +255,22 @@
             this.buttonDELETE.UseVisualStyleBackColor = true;
             this.buttonDELETE.Click += new System.EventHandler(this.buttonDELETE_Click);
             // 
+            // selectedListLABEL
+            // 
+            this.selectedListLABEL.AutoSize = true;
+            this.selectedListLABEL.Font = new System.Drawing.Font("Bahnschrift SemiLight", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.selectedListLABEL.Location = new System.Drawing.Point(42, 30);
+            this.selectedListLABEL.Name = "selectedListLABEL";
+            this.selectedListLABEL.Size = new System.Drawing.Size(92, 16);
+            this.selectedListLABEL.TabIndex = 7;
+            this.selectedListLABEL.Text = "Текущий лист: ";
+            // 
             // ModuleADMIN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(838, 488);
+            this.Controls.Add(this.selectedListLABEL);
             this.Controls.Add(this.buttonDELETE);
             this.Controls.Add(this.buttonADD);
             this.Controls.Add(this.DoneBUTTON);
@@ -300,5 +312,6 @@
         private System.Windows.Forms.ToolStripMenuItem logFolder_TSM;
         private System.Windows.Forms.Button buttonADD;
         private System.Windows.Forms.Button buttonDELETE;
+        private System.Windows.Forms.Label selectedListLABEL;
     }
 }

@@ -17,16 +17,20 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
     {
         public string filePath = "Автомобили.xlsx";
         string[] headers = { "ID", "Марка", "Модель", "Гос. номер", "Год выпуска", "Статус" };
+        private void initHEADERS(IXLWorksheet ws) //вынесен метод создания заголовков в отдельную функцию вместо исп. цикла в методе CREATE
+        {
+            for (int i = 0; i < headers.Length; i++)
+            {
+                ws.Cell(1, i + 1).Value = headers[i];
+                ws.Column(i + 1).Width = 20;
+            }
+        }
         public void CREATE()
         {
             using (var workbook = new XLWorkbook())
             {
                 var ws = workbook.Worksheets.Add("Автомобили");
-                for (int i = 0; i < headers.Length; i++)
-                {
-                    ws.Cell(1, i + 1).Value = headers[i];
-                    ws.Column(i + 1).Width = 20;
-                }
+                initHEADERS(ws);
                 workbook.SaveAs(filePath);
             }
             LOGGER.LOG("Создан новый файл 'Автомобили.xlsx'");
@@ -56,7 +60,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         {
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("Файл не найден!");
+                MessageBox.Show("Файл не найден! Для создания нажмите \"Добавить\" внизу");
                 return new DataTable();
             }
             using (var workbook = new XLWorkbook(filePath))

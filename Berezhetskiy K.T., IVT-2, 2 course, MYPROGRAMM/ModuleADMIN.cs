@@ -38,16 +38,19 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         }
         private void studentsTSM_Click(object sender, EventArgs e)
         {
+            selectedListLABEL.Text = "Текущий лист: ученики";
             dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
             currentTable_ = "students";
         }
         private void carsTSM_Click(object sender, EventArgs e)
         {
+            selectedListLABEL.Text = "Текущий лист: автомобили";
             dataGridView1.DataSource = FunctionXLSXforCars.SHOW();
             currentTable_ = "cars";
         }
         private void scheduleTSM_Click(object sender, EventArgs e)
         {
+            selectedListLABEL.Text = "Текущий лист: расписание";
             dataGridView1.DataSource = FunctionXLSXforLessons.SHOW();
             currentTable_ = "lessons";
             if (dataGridView1.Rows.Count > 0)
@@ -55,9 +58,14 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 CancelBUTTON.Visible = true;
                 DoneBUTTON.Visible = true;
             }
+            if (!File.Exists(instuctorsPath_))
+            {
+                MessageBox.Show("Для добавления занятий сначала создайте список инструкторов!");
+            }
         }
         private void instructorsTSM_Click(object sender, EventArgs e)
         {
+            selectedListLABEL.Text = "Текущий лист: инструкторы";
             dataGridView1.DataSource = FunctionXLSXforInstructors.SHOW();
             currentTable_ = "instructors";
         }
