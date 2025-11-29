@@ -37,13 +37,12 @@
             this.markaBOX = new System.Windows.Forms.TextBox();
             this.yearBOX = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.AccessChoice = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // addBUTTON
             // 
             this.addBUTTON.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.addBUTTON.Location = new System.Drawing.Point(12, 308);
+            this.addBUTTON.Location = new System.Drawing.Point(12, 293);
             this.addBUTTON.Name = "addBUTTON";
             this.addBUTTON.Size = new System.Drawing.Size(226, 56);
             this.addBUTTON.TabIndex = 16;
@@ -123,25 +122,11 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Год выпуска";
             // 
-            // AccessChoice
-            // 
-            this.AccessChoice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AccessChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AccessChoice.FormattingEnabled = true;
-            this.AccessChoice.Items.AddRange(new object[] {
-            "Свободен",
-            "Занят"});
-            this.AccessChoice.Location = new System.Drawing.Point(12, 270);
-            this.AccessChoice.Name = "AccessChoice";
-            this.AccessChoice.Size = new System.Drawing.Size(226, 26);
-            this.AccessChoice.TabIndex = 20;
-            // 
             // addCARS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(253, 395);
-            this.Controls.Add(this.AccessChoice);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.yearBOX);
             this.Controls.Add(this.addBUTTON);
@@ -171,6 +156,5 @@
         private System.Windows.Forms.TextBox markaBOX;
         private System.Windows.Forms.TextBox yearBOX;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox AccessChoice;
     }
 }

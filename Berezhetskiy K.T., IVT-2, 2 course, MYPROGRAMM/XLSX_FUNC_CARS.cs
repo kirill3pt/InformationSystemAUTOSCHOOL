@@ -13,11 +13,19 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
+    public class deleteOPTIONS
+    {
+        public int id { get; set; }
+        public string reason { get; set; } = "удалено пользователем";
+        public bool confirm { get; set; }
+
+    }
     public class XLSX_FUNC_CARS
     {
         public string filePath = "Автомобили.xlsx";
-        string[] headers = { "ID", "Марка", "Модель", "Гос. номер", "Год выпуска", "Статус" };
-        private void initHEADERS(IXLWorksheet ws) //вынесен метод создания заголовков в отдельную функцию вместо исп. цикла в методе CREATE
+        string[] headers = { "ID", "Марка", "Модель", "Гос. номер", "Год выпуска" };
+        private void initHEADERS(IXLWorksheet ws) //вынесен метод создания заголовков в отдельную функцию вместо исп.
+                                                  //цикла в методе CREATE
         {
             for (int i = 0; i < headers.Length; i++)
             {
@@ -35,7 +43,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             }
             LOGGER.LOG("Создан новый файл 'Автомобили.xlsx'");
         }
-        public void SAVE(string marka, string model, string number, string year, string access)
+        public void SAVE(string marka, string model, string number, string year)
         {
             if (!File.Exists(filePath))
             {
@@ -45,16 +53,16 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             {
                 var ws = workbook.Worksheet(1);
                 int lastRow = ws.LastRowUsed()?.RowNumber() + 1 ?? 2;
-                string[] data = { marka, model, number, year, access };
+                //убрана неиспользуемая переменная на этом месте
                 ws.Cell(lastRow, 1).Value = lastRow - 1;
                 ws.Cell(lastRow, 2).Value = marka;
                 ws.Cell(lastRow, 3).Value = model;
                 ws.Cell(lastRow, 4).Value = number;
                 ws.Cell(lastRow, 5).Value = year;
-                ws.Cell(lastRow, 6).Value = access;
+                //удалён параметр "статус" в листах, форме добавления машин
                 workbook.Save();
             }
-            LOGGER.LOG($"Добавлен автомобиль: {marka}, {model}, {number}, {year}, {access}");
+            LOGGER.LOG($"Добавлен автомобиль: {marka}, {model}, {number}, {year}");
         }
         public DataTable SHOW()
         {
@@ -98,7 +106,24 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             try
             {
                 carBOX.Items.Clear();
-                DataTable carsTABLE = ReadCARS();
+                DataTable carsTABLE = new DataTable(); //встроен метов DataTable, для загрузки 
+                //данных о машинах в combobox для создания занятий, ранее был вынесен в отдельный метод
+                foreach (var header in headers)
+                {
+                    carsTABLE.Columns.Add(header);
+                }
+                using (var workbook = new XLWorkbook(filePath))
+                {
+                    var ws = workbook.Worksheet(1);
+                    var rows = ws.RowsUsed().Skip(1);
+                    foreach (var row in rows)
+                    {
+                        DataRow newROWS = carsTABLE.NewRow();
+                        for (int i = 0; i < headers.Length; i++)
+                            newROWS[i] = row.Cell(i + 1).Value.ToString();
+                        carsTABLE.Rows.Add(newROWS);
+                    }
+                }
 
                 foreach (DataRow row in carsTABLE.Rows)
                 {
@@ -119,28 +144,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 MessageBox.Show($"Ошибка загрузки автомобилей: {ex.Message}");
             }
         }
-        public DataTable ReadCARS()
-        {
-            DataTable TABLE = new DataTable();
-            foreach (var header in headers)
-            {
-                TABLE.Columns.Add(header);
-            }
-            using (var workbook = new XLWorkbook(filePath))
-            {
-                var ws = workbook.Worksheet(1);
-                var rows = ws.RowsUsed().Skip(1);
-                foreach (var row in rows)
-                {
-                    DataRow newROWS = TABLE.NewRow();
-                    for (int i = 0; i < headers.Length; i++)
-                        newROWS[i] = row.Cell(i + 1).Value.ToString();
-                    TABLE.Rows.Add(newROWS);
-                }
-            }
-            return TABLE;
-        }
-        public void DELETE(int id)
+        public void DELETE(deleteOPTIONS options)
         {
             try
             {
@@ -150,16 +154,26 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     return;
                 }
                 DialogResult confirm = MessageBox.Show(
-                    $"Удалить автомобиль с ID {id}?",
+                    $"Удалить автомобиль с ID {options.id}?",
                     "Подтверждение удаления",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning
                 );
 
-                if (confirm != DialogResult.Yes)
+                if (options.confirm)
                 {
-                    LOGGER.LOG($"Удаление автомобиля с ID {id} отменено пользователем.");
-                    return;
+                    DialogResult confirms = MessageBox.Show(
+                        $"Удалить автомобиль с ID {options.id}?",
+                        "Подтверждение удаления",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    );
+
+                    if (confirm != DialogResult.Yes)
+                    {
+                        LOGGER.LOG($"Удаление автомобиля с ID {options.id} отменено пользователем.");
+                        return;
+                    }
                 }
 
                 using (var workbook = new XLWorkbook(filePath))
@@ -171,7 +185,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     foreach (var row in rows)
                     {
                         int currentId = row.Cell(1).GetValue<int>();
-                        if (currentId == id)
+                        if (currentId == options.id)
                         {
                             row.Delete();
                             found = true;
@@ -189,19 +203,19 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
                         workbook.Save();
                         MessageBox.Show("Автомобиль успешно удалён!");
-                        LOGGER.LOG($"Автомобиль с ID {id} удалён из базы.");
+                        LOGGER.LOG($"Автомобиль с ID {options.id}, причина: {options.reason} - удалён.");
                     }
                     else
                     {
                         MessageBox.Show("Автомобиль с таким ID не найден!");
-                        LOGGER.LOG($"Попытка удалить несуществующего автомобиля ID {id}.");
+                        LOGGER.LOG($"Попытка удалить несуществующего автомобиля ID {options.id}.");
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при удалении: {ex.Message}");
-                LOGGER.LOG($"Ошибка при удалении автомобиля ID {id}: {ex.Message}");
+                LOGGER.LOG($"Ошибка при удалении автомобиля ID {options.id}: {ex.Message}");
             }
         }
     }

@@ -46,7 +46,6 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             numberCar = numberBOX.Text;
             modelCar = modelBOX.Text;
             yearOfCar = yearBOX.Text;
-            AccessCar = AccessChoice.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

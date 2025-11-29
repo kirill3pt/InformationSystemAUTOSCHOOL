@@ -197,7 +197,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     {
                         if (form.ShowDialog() == DialogResult.OK)
                         {
-                            FunctionXLSXforCars.SAVE(form.markaCar, form.modelCar, form.numberCar, form.yearOfCar, form.AccessCar);
+                            FunctionXLSXforCars.SAVE(form.markaCar, form.modelCar, form.numberCar, form.yearOfCar);
                             dataGridView1.DataSource = FunctionXLSXforCars.SHOW();
                             MessageBox.Show("Автомобиль добавлен!");
                         }
@@ -247,7 +247,8 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     dataGridView1.DataSource = FunctionsXLSXforStudents.SHOW();
                     break;
                 case "cars":
-                    FunctionXLSXforCars.DELETE(id);
+                    deleteOPTIONS options = new deleteOPTIONS { id = id };
+                    FunctionXLSXforCars.DELETE(options);
                     dataGridView1.DataSource = FunctionXLSXforCars.SHOW();
                     break;
                 case "instructors":
