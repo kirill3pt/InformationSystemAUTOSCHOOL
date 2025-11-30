@@ -1,22 +1,50 @@
-﻿using System;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
-    public class XLSX_FUNC_LESSONS
+    public abstract class upperPole
     {
-        public string filePath = "Занятия.xlsx";
-        private readonly string[] headers = { "ID", "Дата", "Время", "Ученик (Ф.И.О)", "Инструктор (Ф.И.О)", "Автомобиль (Марка, модель, гос. номер", "Статус" };
+        protected string filePath; //поднятое поле
+        protected string[] headers; //поднятое поле
+        protected upperPole(string filePath, string[] headers)
+        {
+            this.filePath = filePath;
+            this.headers = headers;
+        }
+        public void CREATE(string sheetName = "Занятия") //поднятый метод
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var ws = workbook.Worksheets.Add(sheetName);
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    ws.Cell(1, i + 1).Value = headers[i];
+                    ws.Column(i + 1).Width = 20;
+                }
+                workbook.SaveAs(filePath);
+            }
+            LOGGER.LOG($"Создан новый файл '{filePath}'");
+        }
+    }
+    public class XLSX_FUNC_LESSONS : upperPole
+    {
+        public XLSX_FUNC_LESSONS() :
+            base("Занятия.xlsx", new string[] { "ID", "Дата", "Время", "Ученик (Ф.И.О)", "Инструктор (Ф.И.О)",
+                "Автомобиль (Марка, модель, гос. номер", "Статус" }) 
+        { }
         public void CREATE()
         {
             using (var workbook = new XLWorkbook())
@@ -35,7 +63,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         {
             if (!File.Exists(filePath))
             {
-                CREATE();
+                CREATE("Занятия");
             }
             using (var workbook = new XLWorkbook(filePath))
             {
@@ -43,6 +71,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 int lastRow = ws.LastRowUsed()?.RowNumber() + 1 ?? 2;
                 string[] data = { date, time, fio, car };
                 ws.Cell(lastRow, 1).Value = lastRow - 1;
+                statusStyle(ws.Cell(lastRow, 1), "запланировано");
                 ws.Cell(lastRow, 2).Value = date;
                 ws.Cell(lastRow, 3).Value = time;
                 ws.Cell(lastRow, 4).Value = fio;
@@ -89,7 +118,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
             }
         }
-        public void statusLESSON(int id, string status)
+        public void statusLESSON(int id, string status) //спуск вспомогательного метода
         {
             using (var workbook = new XLWorkbook(filePath))
             {
@@ -101,19 +130,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     if (row.Cell(1).GetValue<int>() == id)
                     {
                         var idCell = row.Cell(1);
-
-                        if (status == "запланировано")
-                        {
-                            idCell.Style.Fill.BackgroundColor = XLColor.Yellow;
-                        }
-                        else if (status == "отменено")
-                        {
-                            idCell.Style.Fill.BackgroundColor = XLColor.Red;
-                        }
-                        else if (status == "проведено")
-                        {
-                            idCell.Style.Fill.BackgroundColor = XLColor.Green;
-                        }
+                        statusStyle(row.Cell(1), status);
                         int statusCol = ws.LastColumnUsed().ColumnNumber();
                         row.Cell(statusCol).Value = status;
                         LOGGER.LOG($"Изменён статус занятия ID={id} → {status}");
@@ -121,6 +138,21 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     }
                 }
                 workbook.Save();
+            }
+        }
+        private void statusStyle(IXLCell cell, string status) //спуск вспомогательного метода
+        {
+            if (status == "запланировано")
+            {
+                cell.Style.Fill.BackgroundColor = XLColor.Yellow;
+            }
+            else if (status == "отменено")
+            {
+                cell.Style.Fill.BackgroundColor = XLColor.Red;
+            }
+            else if (status == "проведено")
+            {
+                cell.Style.Fill.BackgroundColor = XLColor.Green;
             }
         }
         public void DELETE(int id)
