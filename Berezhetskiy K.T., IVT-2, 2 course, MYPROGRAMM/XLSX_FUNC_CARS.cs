@@ -13,7 +13,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
-    public class deleteOPTIONS
+    public class deleteOPTIONS // класс для метода удаления
     {
         public int id { get; set; }
         public string reason { get; set; } = "удалено пользователем";
@@ -144,7 +144,8 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 MessageBox.Show($"Ошибка загрузки автомобилей: {ex.Message}");
             }
         }
-        public void DELETE(deleteOPTIONS options)
+        public void DELETE(deleteOPTIONS options) //заменен параметр с id на список из параметров - options
+                //куда входит причина удаления, id, логическая переменная
         {
             try
             {

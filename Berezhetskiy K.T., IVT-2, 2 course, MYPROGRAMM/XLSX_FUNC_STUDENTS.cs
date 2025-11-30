@@ -32,12 +32,16 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             }
             LOGGER.LOG("Создан новый файл 'Ученики.xlsx'");
         }
-        public void SAVE(string fio, string phone, string group, string paid)
-        {
+        private void ifFileExists() //консолидация дублирующихся условных фрагментов
+        { 
             if (!File.Exists(filePath))
             {
-                CREATE();
+                CREATE(); 
             }
+        }
+        public void SAVE(string fio, string phone, string group, string paid)
+        {
+            ifFileExists();
             using (var workbook = new XLWorkbook(filePath))
             {
                 var ws = workbook.Worksheet(1);
@@ -90,29 +94,41 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
             }
         }
-        public void MakeCOMBOBOX(ComboBox comboBox)
+        public void MakeCOMBOBOX(ComboBox comboBox) //удален управляющий флаг,
+                                                    //управление вынесено в два метода: firstItemIfExists 
+                                                    //и showErrorMessage
         {
             try
             {
                 comboBox.Items.Clear();
                 DataTable studentsTABLE = ReadSTUDENTS();
-
                 foreach (DataRow row in studentsTABLE.Rows)
                 {
                     string fio = row["ФИО"].ToString();
-                    string fioINFO = $"{fio}";
-                    comboBox.Items.Add(fioINFO);
+                    if (!string.IsNullOrEmpty(fio))
+                    {
+                        comboBox.Items.Add(fio);
+                    }
                 }
 
-                if (comboBox.Items.Count > 0)
-                {
-                    comboBox.SelectedIndex = 0;
-                }
+                firstItemIfExists(comboBox);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки ФИО: {ex.Message}");
+                showErrorMessage(ex);
             }
+        }
+        private void firstItemIfExists(ComboBox comboBox)
+        {
+            if (comboBox.Items.Count == 0)
+            {
+                return;
+            }
+            comboBox.SelectedIndex = 0;
+        }
+        private void showErrorMessage(Exception ex)
+        {
+            MessageBox.Show($"Ошибка загрузки ФИО: {ex.Message}");
         }
         public DataTable ReadSTUDENTS()
         {
@@ -135,6 +151,21 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             }
             return TABLE;
         }
+        private bool confirmDelete(int id) //декомпозиция условного оператора
+        {
+            DialogResult confirm = MessageBox.Show(
+            $"Удалить ученика с ID {id}?",
+            "Подтверждение удаления",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning
+            );
+            if (confirm != DialogResult.Yes)
+            {
+                LOGGER.LOG($"Удаление ученика с ID {id} отменено пользователем.");
+                return false;
+            }
+            return true;
+        }
         public void DELETE(int id)
         {
             try
@@ -144,19 +175,10 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     MessageBox.Show("Файл не найден!");
                     return;
                 }
-                DialogResult confirm = MessageBox.Show(
-                    $"Удалить ученика с ID {id}?",
-                    "Подтверждение удаления",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
-
-                if (confirm != DialogResult.Yes)
+                if (!confirmDelete(id)) //декомпозиция условного оператора
                 {
-                    LOGGER.LOG($"Удаление ученика с ID {id} отменено пользователем.");
                     return;
                 }
-
                 using (var workbook = new XLWorkbook(filePath))
                 {
                     var ws = workbook.Worksheet(1);
@@ -186,10 +208,11 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                         MessageBox.Show("Ученик успешно удалён!");
                         LOGGER.LOG($"Ученик с ID {id} удалён из базы.");
                     }
-                    else
+                    if (!found) //консолидация условного выражения
                     {
                         MessageBox.Show("Ученик с таким ID не найден!");
                         LOGGER.LOG($"Попытка удалить несуществующего ученика ID {id}.");
+                        return;
                     }
                 }
             }
