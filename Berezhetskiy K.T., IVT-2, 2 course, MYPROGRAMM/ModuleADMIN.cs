@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using System;
+using System.IO;
 using System.Collections.Generic;
 
 using System.Windows.Forms;
@@ -72,27 +73,59 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         }
         private void make_statementTSM_Click(object sender, EventArgs e)
         {
-            using (var workbook = new XLWorkbook())
+            if (!checkFiles(studentsPath_, carsPath_, instuctorsPath_, lessonsPath_))
             {
-                using (var studentsBook = new XLWorkbook(studentsPath_))
-                {
-                    studentsBook.Worksheet(1).CopyTo(workbook, "Ученики");
-                }
-                using (var carsBook = new XLWorkbook(carsPath_))
-                {
-                    carsBook.Worksheet(1).CopyTo(workbook, "Автомобили");
-                }
-                using (var instructorsBook = new XLWorkbook(instuctorsPath_))
-                {
-                    instructorsBook.Worksheet(1).CopyTo(workbook, "Инструкторы");
-                }
-                using (var lessonsBook = new XLWorkbook(lessonsPath_))
-                {
-                    lessonsBook.Worksheet(1).CopyTo(workbook, "Занятия");
-                }
-                workbook.SaveAs(otchetPath_);
-                MessageBox.Show("Отчёт создан!");
+                return;
             }
+            try
+            {
+                using (var workbook = new XLWorkbook())
+                {
+                    using (var studentsBook = new XLWorkbook(studentsPath_))
+                        studentsBook.Worksheet(1).CopyTo(workbook, "Ученики");
+
+                    using (var carsBook = new XLWorkbook(carsPath_))
+                        carsBook.Worksheet(1).CopyTo(workbook, "Автомобили");
+
+                    using (var instructorsBook = new XLWorkbook(instuctorsPath_))
+                        instructorsBook.Worksheet(1).CopyTo(workbook, "Инструкторы");
+
+                    using (var lessonsBook = new XLWorkbook(lessonsPath_))
+                        lessonsBook.Worksheet(1).CopyTo(workbook, "Занятия");
+
+                    workbook.SaveAs(otchetPath_);
+                }
+
+                MessageBox.Show("Отчёт создан!");
+                LOGGER.LOG("Создан отчёт: " + otchetPath_);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при создании отчёта:\n" + ex.Message);
+                LOGGER.LOG("Ошибка создания отчёта: " + ex.Message);
+            }
+        }
+        private bool checkFiles(params string[] paths)
+        {
+            var missing = new List<string>();
+
+            foreach (var path in paths)
+                if (!File.Exists(path))
+                    missing.Add(path);
+
+            if (missing.Count > 0)
+            {
+                MessageBox.Show(
+                    "Невозможно создать отчёт — отсутствуют файлы:\n\n" +
+                    string.Join("\n", missing),
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return false;
+            }
+
+            return true;
         }
         private void CancelBUTTON_Click(object sender, EventArgs e)
         {
