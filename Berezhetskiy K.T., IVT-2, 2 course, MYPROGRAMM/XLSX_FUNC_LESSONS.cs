@@ -16,15 +16,15 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
     public class XLSX_FUNC_LESSONS
     {
         public string filePath = "Занятия.xlsx";
-        private readonly string[] headers = { "ID", "Дата", "Время", "Ученик (Ф.И.О)", "Инструктор (Ф.И.О)", "Автомобиль (Марка, модель, гос. номер", "Статус" };
+        private readonly string[] headers_ = { "ID", "Дата", "Время", "Ученик (Ф.И.О)", "Инструктор (Ф.И.О)", "Автомобиль (Марка, модель, гос. номер", "Статус" };
         public void CREATE()
         {
             using (var workbook = new XLWorkbook())
             {
                 var ws = workbook.Worksheets.Add("Занятия");
-                for (int i = 0; i < headers.Length; i++)
+                for (int i = 0; i < headers_.Length; i++)
                 {
-                    ws.Cell(1, i + 1).Value = headers[i];
+                    ws.Cell(1, i + 1).Value = headers_[i];
                     ws.Column(i + 1).Width = 20;
                 }
                 workbook.SaveAs(filePath);
@@ -51,13 +51,13 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 7).Value = status;
                 workbook.Save();
             }
-            LOGGER.LOG($"Добавлено занятие: {date} {time}, ученик: {fio}, авто: {car}, статус: {status}");
+            LOGGER.LOG($"Добавлено занятие: {date} {time}, ученик: {fio}, авто: {car}, статус: {status} ");
         }
         public DataTable SHOW()
         {
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("Файл не найден!");
+                MessageBox.Show("Файл не найден! Для создания нажмите \"Добавить\" внизу");
                 return new DataTable();
             }
             using (var workbook = new XLWorkbook(filePath))
@@ -66,15 +66,15 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 {
                     DataTable TABLE = new DataTable();
                     var worksheet = workbook.Worksheet(1);
-                    for (int i = 0; i < headers.Length; i++)
+                    for (int i = 0; i < headers_.Length; i++)
                     {
-                        TABLE.Columns.Add(headers[i]);
+                        TABLE.Columns.Add(headers_[i]);
                     }
                     var ROWS = worksheet.RowsUsed().Skip(1);
                     foreach (var row in ROWS)
                     {
                         DataRow newROWS = TABLE.NewRow();
-                        for (int i = 0; i < headers.Length; i++)
+                        for (int i = 0; i < headers_.Length; i++)
                         {
                             newROWS[i] = row.Cell(i + 1).Value.ToString();
                         }
@@ -123,68 +123,61 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 workbook.Save();
             }
         }
-        public void DELETE(int id)
+        public void DELETE(List<int> ids)
         {
-            try
+            if (!File.Exists(filePath))
             {
-                if (!File.Exists(filePath))
-                {
-                    MessageBox.Show("Файл не найден!");
-                    return;
-                }
-                DialogResult confirm = MessageBox.Show(
-                    $"Удалить занятие с ID {id}?",
-                    "Подтверждение удаления",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                );
-
-                if (confirm != DialogResult.Yes)
-                {
-                    LOGGER.LOG($"Удаление занятия с ID {id} отменено пользователем.");
-                    return;
-                }
-
-                using (var workbook = new XLWorkbook(filePath))
-                {
-                    var ws = workbook.Worksheet(1);
-                    var rows = ws.RowsUsed().Skip(1).ToList();
-                    bool found = false;
-
-                    foreach (var row in rows)
-                    {
-                        int currentId = row.Cell(1).GetValue<int>();
-                        if (currentId == id)
-                        {
-                            row.Delete();
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (found)
-                    {
-                        int newId = 1;
-                        foreach (var row in ws.RowsUsed().Skip(1))
-                        {
-                            row.Cell(1).Value = newId++;
-                        }
-
-                        workbook.Save();
-                        MessageBox.Show("Занятие успешно удалено!");
-                        LOGGER.LOG($"Занятие с ID {id} удалено из базы.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Занятие с таким ID не найдено!");
-                        LOGGER.LOG($"Попытка удалить несуществующее занятие ID {id}.");
-                    }
-                }
+                MessageBox.Show("Файл не найден!");
+                return;
             }
-            catch (Exception ex)
+
+            DialogResult confirm = MessageBox.Show(
+                $"Удалить записи занятия с ID: {string.Join(", ", ids)}?",
+                "Подтверждение удаления",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+
+            if (confirm != DialogResult.Yes)
             {
-                MessageBox.Show($"Ошибка при удалении: {ex.Message}");
-                LOGGER.LOG($"Ошибка при удалении занятия ID {id}: {ex.Message}");
+                LOGGER.LOG($"Удаление отменено пользователем.");
+                return;
+            }
+
+            using (var workbook = new XLWorkbook(filePath))
+            {
+                var ws = workbook.Worksheet(1);
+                var rows = ws.RowsUsed().Skip(1).ToList();
+
+                bool anyDeleted = false;
+
+                foreach (var row in rows)
+                {
+                    int currentId = row.Cell(1).GetValue<int>();
+                    if (ids.Contains(currentId))
+                    {
+                        row.Delete();
+                        anyDeleted = true;
+                    }
+                }
+
+                if (anyDeleted)
+                {
+                    int newId = 1;
+                    foreach (var row in ws.RowsUsed().Skip(1))
+                    {
+                        row.Cell(1).Value = newId++;
+                    }
+
+                    workbook.Save();
+                    MessageBox.Show("Записи успешно удалены!");
+                    LOGGER.LOG($"Удалены записи занятия с ID: {string.Join(", ", ids)}.");
+                }
+                else
+                {
+                    MessageBox.Show("Ни одна из выбранных записей не найдена!");
+                    LOGGER.LOG($"Попытка удалить несуществующие записи занятий ID: {string.Join(", ", ids)}.");
+                }
             }
         }
     }

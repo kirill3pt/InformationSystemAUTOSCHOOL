@@ -32,7 +32,6 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             StudentFIO = fioBOX.Text;
             NumberPhone = numberBOX.Text;
             Group = groupBOX.Text;
-            Paid = paidOrNot.Checked ? "Оплачено" : "Не оплачено";
 
             this.DialogResult = DialogResult.OK;
             this.Close();

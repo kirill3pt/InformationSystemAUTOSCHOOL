@@ -50,6 +50,7 @@
             this.DoneBUTTON = new System.Windows.Forms.Button();
             this.buttonADD = new System.Windows.Forms.Button();
             this.buttonDELETE = new System.Windows.Forms.Button();
+            this.selectedLISTlabel = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,7 @@
             this.toolStripSplitButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(838, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(796, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -145,6 +146,7 @@
             this.aboutTSM.Name = "aboutTSM";
             this.aboutTSM.Size = new System.Drawing.Size(163, 22);
             this.aboutTSM.Text = "О программе";
+            this.aboutTSM.Click += new System.EventHandler(this.aboutTSM_Click);
             // 
             // toolStripSplitButton1
             // 
@@ -200,7 +202,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(44, 49);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(715, 350);
+            this.dataGridView1.Size = new System.Drawing.Size(680, 350);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
@@ -208,7 +210,7 @@
             // 
             this.CancelBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CancelBUTTON.Location = new System.Drawing.Point(535, 428);
+            this.CancelBUTTON.Location = new System.Drawing.Point(500, 428);
             this.CancelBUTTON.Name = "CancelBUTTON";
             this.CancelBUTTON.Size = new System.Drawing.Size(90, 36);
             this.CancelBUTTON.TabIndex = 3;
@@ -221,7 +223,7 @@
             // 
             this.DoneBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.DoneBUTTON.Location = new System.Drawing.Point(631, 428);
+            this.DoneBUTTON.Location = new System.Drawing.Point(596, 428);
             this.DoneBUTTON.Name = "DoneBUTTON";
             this.DoneBUTTON.Size = new System.Drawing.Size(128, 36);
             this.DoneBUTTON.TabIndex = 4;
@@ -254,18 +256,28 @@
             this.buttonDELETE.UseVisualStyleBackColor = true;
             this.buttonDELETE.Click += new System.EventHandler(this.buttonDELETE_Click);
             // 
+            // selectedLISTlabel
+            // 
+            this.selectedLISTlabel.AutoSize = true;
+            this.selectedLISTlabel.Location = new System.Drawing.Point(41, 33);
+            this.selectedLISTlabel.Name = "selectedLISTlabel";
+            this.selectedLISTlabel.Size = new System.Drawing.Size(0, 13);
+            this.selectedLISTlabel.TabIndex = 7;
+            // 
             // ModuleADMIN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(838, 488);
+            this.ClientSize = new System.Drawing.Size(796, 488);
+            this.Controls.Add(this.selectedLISTlabel);
             this.Controls.Add(this.buttonDELETE);
             this.Controls.Add(this.buttonADD);
             this.Controls.Add(this.DoneBUTTON);
             this.Controls.Add(this.CancelBUTTON);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.toolStrip1);
-            this.MinimumSize = new System.Drawing.Size(854, 527);
+            this.MaximumSize = new System.Drawing.Size(812, 527);
+            this.MinimumSize = new System.Drawing.Size(812, 527);
             this.Name = "ModuleADMIN";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Модуль администратора";
@@ -300,5 +312,6 @@
         private System.Windows.Forms.ToolStripMenuItem logFolder_TSM;
         private System.Windows.Forms.Button buttonADD;
         private System.Windows.Forms.Button buttonDELETE;
+        private System.Windows.Forms.Label selectedLISTlabel;
     }
 }

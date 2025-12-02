@@ -36,6 +36,7 @@
             this.goToProgramm = new System.Windows.Forms.Button();
             this.UserRoleChoice = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.registrationBUTTON = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,10 +100,11 @@
             this.goToProgramm.Location = new System.Drawing.Point(84, 134);
             this.goToProgramm.Name = "goToProgramm";
             this.goToProgramm.Size = new System.Drawing.Size(216, 42);
-            this.goToProgramm.TabIndex = 3;
+            this.goToProgramm.TabIndex = 4;
             this.goToProgramm.Text = "ВХОД";
             this.goToProgramm.UseVisualStyleBackColor = false;
             this.goToProgramm.Click += new System.EventHandler(this.goToProgramm_Click);
+            this.goToProgramm.KeyUp += new System.Windows.Forms.KeyEventHandler(this.goToProgramm_KeyUp);
             // 
             // UserRoleChoice
             // 
@@ -117,7 +119,8 @@
             this.UserRoleChoice.Name = "UserRoleChoice";
             this.UserRoleChoice.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.UserRoleChoice.Size = new System.Drawing.Size(216, 27);
-            this.UserRoleChoice.TabIndex = 4;
+            this.UserRoleChoice.TabIndex = 3;
+            this.UserRoleChoice.SelectedIndexChanged += new System.EventHandler(this.UserRoleChoice_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -129,12 +132,25 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "РОЛЬ:";
             // 
+            // registrationBUTTON
+            // 
+            this.registrationBUTTON.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.registrationBUTTON.Font = new System.Drawing.Font("Bahnschrift Condensed", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.registrationBUTTON.Location = new System.Drawing.Point(84, 182);
+            this.registrationBUTTON.Name = "registrationBUTTON";
+            this.registrationBUTTON.Size = new System.Drawing.Size(216, 42);
+            this.registrationBUTTON.TabIndex = 5;
+            this.registrationBUTTON.Text = "РЕГИСТРАЦИЯ(для инструкторов)";
+            this.registrationBUTTON.UseVisualStyleBackColor = false;
+            this.registrationBUTTON.Click += new System.EventHandler(this.registrationBUTTON_Click);
+            // 
             // loginPanel
             // 
             this.AcceptButton = this.goToProgramm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 189);
+            this.ClientSize = new System.Drawing.Size(319, 244);
+            this.Controls.Add(this.registrationBUTTON);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.UserRoleChoice);
             this.Controls.Add(this.goToProgramm);
@@ -161,6 +177,7 @@
         private System.Windows.Forms.Button goToProgramm;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox UserRoleChoice;
+        private System.Windows.Forms.Button registrationBUTTON;
     }
 }
 

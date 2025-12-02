@@ -1,15 +1,6 @@
 ﻿using System;
-using ClosedXML.Excel;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using DocumentFormat.OpenXml.Spreadsheet;
+
 
 namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
@@ -62,11 +53,11 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
                 if (status == "запланировано")
                 {
-                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Yellow;
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightYellow;
                 }
                 else if (status == "отменено")
                 {
-                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Red;
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.OrangeRed;
                 }
                 else if (status == "проведено")
                 {
@@ -81,6 +72,17 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         private void exitTSM_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void aboutTSM_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+            @"Информационная система автошколы. Версия: 0.9.5.
+Разработчик: Бережецкий К.Т., ФТФ, ИВТ-2, 2 курс. Год: 2025
+Данная программа предназначена для работы с модулями администратора и инструктора.",
+            "О программе",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information
+        );
         }
     }
 }
