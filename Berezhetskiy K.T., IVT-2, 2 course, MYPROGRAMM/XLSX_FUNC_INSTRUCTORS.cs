@@ -14,6 +14,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public class XLSX_FUNC_INSTRUCTORS
     {
+        ILOGGER logger = new LOGGER();
         public string filePath = "Инструкторы.xlsx";
         private string[] headers_ = { "ID", "ФИО", "Телефон" };
         public void CREATE()
@@ -28,7 +29,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
                 workbook.SaveAs(filePath);
             }
-            LOGGER.LOG("Создан новый файл 'Инструкторы.xlsx'");
+            logger.LOG("Создан новый файл 'Инструкторы.xlsx'");
         }
         public void SAVE(string fio, string number)
         {
@@ -45,7 +46,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 3).Value = number;
                 workbook.Save();
             }
-            LOGGER.LOG($"Добавлен инструктор: {fio}, {number}");
+            logger.LOG($"Добавлен инструктор: {fio}, {number}");
         }
         public DataTable SHOW()
         {
@@ -148,7 +149,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
             if (confirm != DialogResult.Yes)
             {
-                LOGGER.LOG($"Удаление отменено пользователем.");
+                logger.LOG($"Удаление отменено пользователем.");
                 return;
             }
 
@@ -179,12 +180,12 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
                     workbook.Save();
                     MessageBox.Show("Записи успешно удалены!");
-                    LOGGER.LOG($"Удалены записи инструктора с ID: {string.Join(", ", ids)}.");
+                    logger.LOG($"Удалены записи инструктора с ID: {string.Join(", ", ids)}.");
                 }
                 else
                 {
                     MessageBox.Show("Ни одна из выбранных записей не найдена!");
-                    LOGGER.LOG($"Попытка удалить несуществующие записи инструктора ID: {string.Join(", ", ids)}.");
+                    logger .LOG($"Попытка удалить несуществующие записи инструктора ID: {string.Join(", ", ids)}.");
                 }
             }
         }

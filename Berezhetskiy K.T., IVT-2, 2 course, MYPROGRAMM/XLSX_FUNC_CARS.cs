@@ -11,6 +11,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public class XLSX_FUNC_CARS
     {
+        ILOGGER logger = new LOGGER();
         public string filePath = "Автомобили.xlsx";
         private string[] headers_ = { "ID", "Марка", "Модель", "Гос. номер", "Год выпуска" };
         public void CREATE()
@@ -25,7 +26,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
                 workbook.SaveAs(filePath);
             }
-            LOGGER.LOG("Создан новый файл 'Автомобили.xlsx'");
+            logger.LOG("Создан новый файл 'Автомобили.xlsx'");
         }
         public void SAVE(string marka, string model, string number, string year )
         {
@@ -45,7 +46,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 5).Value = year;
                 workbook.Save();
             }
-            LOGGER.LOG($"Добавлен автомобиль: {marka}, {model}, {number}, {year} ");
+            logger.LOG($"Добавлен автомобиль: {marka}, {model}, {number}, {year} ");
         }
         public DataTable SHOW()
         {
@@ -146,7 +147,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
             if (confirm != DialogResult.Yes)
             {
-                LOGGER.LOG($"Удаление отменено пользователем.");
+                logger.LOG($"Удаление отменено пользователем.");
                 return;
             }
 
@@ -183,12 +184,12 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                     workbook.Save();
                     MessageBox.Show("Записи успешно удалены!");
                     string logMessage = $"Удалены автомобили:\n" + string.Join("\n", deletedCarsInfo);
-                    LOGGER.LOG(logMessage);
+                    logger.LOG(logMessage);
                 }
                 else
                 {
                     MessageBox.Show("Ни одна из выбранных записей не найдена!");
-                    LOGGER.LOG($"Попытка удалить несуществующие записи машин ID: {string.Join(", ", ids)}.");
+                    logger.LOG($"Попытка удалить несуществующие записи машин ID: {string.Join(", ", ids)}.");
                 }
             }
         }

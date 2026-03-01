@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
-    public static class LOGGER
+    public class LOGGER : ILOGGER
     {
         public static string logFILEPATH_ { get; private set; } = "Logs/log.txt";
-        static LOGGER()
+        public LOGGER()
         {
             var savedFolder = Properties.Settings.Default.LogFolderPath;
             if (!string.IsNullOrEmpty(savedFolder))
@@ -15,16 +15,16 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             else
                 logFILEPATH_ = Path.Combine("Logs", "log.txt");
         }
-        public static void SETLOGFOLDER(string folderPath)
+        public void SETLOGFOLDER(string folderPath)
         {
             logFILEPATH_ = Path.Combine(folderPath, "log.txt");
         }
 
-        public static void LOG(string message)
+        public void LOG(string message)
         {
             try
             {
-                string directory = Path.GetDirectoryName(logFILEPATH_);
+                string directory =   Path.GetDirectoryName(logFILEPATH_);
                 if (!Directory.Exists(directory))
                 {
                     Directory.CreateDirectory(directory);

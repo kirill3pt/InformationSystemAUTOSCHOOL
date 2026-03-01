@@ -11,6 +11,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public class XLSX_FUNC_STUDENTS
     {
+        ILOGGER logger = new LOGGER();
         public string filePath = "Ученики.xlsx";
         private string[] headers_ = { "ID", "ФИО", "Телефон", "Группа", "Статус" };
         public void CREATE()
@@ -25,7 +26,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
                 workbook.SaveAs(filePath);
             }
-            LOGGER.LOG("Создан новый файл 'Ученики.xlsx'");
+            logger.LOG("Создан новый файл 'Ученики.xlsx'");
         }
         public void SAVE(string fio, string phone, string group)
         {
@@ -45,7 +46,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 5).Value = "учится";
                 workbook.Save();
             }
-            LOGGER.LOG($"Добавлен ученик: {fio}, {phone}, {group}");
+            logger.LOG($"Добавлен ученик: {fio}, {phone}, {group}");
         }
         public DataTable SHOW()
         {
@@ -147,7 +148,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
             if (confirm != DialogResult.Yes)
             {
-                LOGGER.LOG($"Удаление отменено пользователем.");
+                logger.LOG($"Удаление отменено пользователем.");
                 return;
             }
 
@@ -178,12 +179,12 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
                     workbook.Save();
                     MessageBox.Show("Записи успешно удалены!");
-                    LOGGER.LOG($"Удалены записи ученика с ID: {string.Join(", ", ids)}.");
+                    logger.LOG($"Удалены записи ученика с ID: {string.Join(", ", ids)}.");
                 }
                 else
                 {
                     MessageBox.Show("Ни одна из выбранных записей не найдена!");
-                    LOGGER.LOG($"Попытка удалить несуществующие записи ID: {string.Join(", ", ids)}.");
+                    logger.LOG($"Попытка удалить несуществующие записи ID: {string.Join(", ", ids)}.");
                 }
             }
         }

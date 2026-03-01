@@ -36,7 +36,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         {
             if (string.IsNullOrWhiteSpace(StudentSELECT.Text))
             {
-                MessageBox.Show("Поле 'ФИО' обязательно для заполнения!");
+                MessageBox.Show("Поле 'СТУДЕНТ' обязательно для заполнения!");
                 return;
             }
             Date = SelectDATE.Text;

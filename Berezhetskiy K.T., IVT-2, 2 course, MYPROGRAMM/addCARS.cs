@@ -9,7 +9,6 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         public string modelCar { get; set; }
         public string numberCar { get; set; }
         public string yearOfCar { get; set; }
-        public string AccessCar { get; set; }
 
         public addCARS()
         {

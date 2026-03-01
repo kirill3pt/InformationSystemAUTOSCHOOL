@@ -6,63 +6,51 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public partial class loginPanel : Form
     {
+        private readonly IAUTH iauth;
         private readonly string instructorsFile = "instructors.txt";
         private string RightLOGINforADM = "Login";
         private string RightPASSWORDforADM = "Password";
         public loginPanel()
         {
             InitializeComponent();
+            iauth = new AUTH();
             passwordBox.UseSystemPasswordChar = true;
             registrationBUTTON.Enabled = false;
         }
 
         private void goToProgramm_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(UserRoleChoice.Text))
+            {
+                MessageBox.Show("Выберите роль!");
+                return;
+            }
+
+            bool isAuthenticated = iauth.Authenticate(
+                UserRoleChoice.Text,
+                loginBox.Text,
+                passwordBox.Text
+            );
+
+            if (!isAuthenticated)
+            {
+                MessageBox.Show("Неверный логин или пароль!");
+                return;
+            }
+
             if (UserRoleChoice.Text == "Администратор")
             {
-                if (loginBox.Text == RightLOGINforADM && passwordBox.Text == RightPASSWORDforADM)
-                {
-                    ModuleADMIN moduleADMIN = new ModuleADMIN();
-                    moduleADMIN.ShowDialog();
-                    this.Close();
-                    return;
-                }
-
-                MessageBox.Show("Неверный логин или пароль администратора!");
+                new ModuleADMIN().ShowDialog();
+                Close();
                 return;
             }
+
             if (UserRoleChoice.Text == "Инструктор")
             {
-                if (!File.Exists(instructorsFile))
-                {
-                    MessageBox.Show("Нет зарегистрированных инструкторов!");
-                    return;
-                }
-
-                var lines = File.ReadAllLines(instructorsFile);
-
-                foreach (var line in lines)
-                {
-                    var parts = line.Trim().Split(':');
-                    if (parts.Length == 2)
-                    {
-                        string log = parts[0];
-                        string pass = parts[1];
-
-                        if (log == loginBox.Text && pass == passwordBox.Text)
-                        {
-                            ModuleINSTRUCTOR moduleINSTRUCTOR = new ModuleINSTRUCTOR();
-                            moduleINSTRUCTOR.ShowDialog();
-                            this.Close();
-                            return;
-                        }
-                    }
-                }
-
-                MessageBox.Show("Неверный логин или пароль инструктора!");
+                new ModuleINSTRUCTOR().ShowDialog();
+                Close();
                 return;
             }
-            MessageBox.Show("Выберите роль!");
         }
 
         private void goToProgramm_KeyUp(object sender, KeyEventArgs e)

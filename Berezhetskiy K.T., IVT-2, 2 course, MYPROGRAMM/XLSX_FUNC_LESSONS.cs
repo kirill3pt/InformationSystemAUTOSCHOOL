@@ -15,6 +15,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public class XLSX_FUNC_LESSONS
     {
+        ILOGGER logger = new LOGGER();
         public string filePath = "Занятия.xlsx";
         private readonly string[] headers_ = { "ID", "Дата", "Время", "Ученик (Ф.И.О)", "Инструктор (Ф.И.О)", "Автомобиль (Марка, модель, гос. номер", "Статус" };
         public void CREATE()
@@ -29,7 +30,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
                 workbook.SaveAs(filePath);
             }
-            LOGGER.LOG("Создан новый файл 'Занятия.xlsx'");
+            logger.LOG("Создан новый файл 'Занятия.xlsx'");
         }
         public void SAVE(string date, string time, string fio, string instructor, string car, string status = "запланировано")
         {
@@ -51,7 +52,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 ws.Cell(lastRow, 7).Value = status;
                 workbook.Save();
             }
-            LOGGER.LOG($"Добавлено занятие: {date} {time}, ученик: {fio}, авто: {car}, статус: {status} ");
+            logger.LOG($"Добавлено занятие: {date} {time}, ученик: {fio}, авто: {car}, статус: {status} ");
         }
         public DataTable SHOW()
         {
@@ -116,7 +117,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                         }
                         int statusCol = ws.LastColumnUsed().ColumnNumber();
                         row.Cell(statusCol).Value = status;
-                        LOGGER.LOG($"Изменён статус занятия ID={id} → {status}");
+                        logger.LOG($"Изменён статус занятия ID={id} → {status}");
                         break;
                     }
                 }
@@ -140,7 +141,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
             if (confirm != DialogResult.Yes)
             {
-                LOGGER.LOG($"Удаление отменено пользователем.");
+                logger.LOG($"Удаление отменено пользователем.");
                 return;
             }
 
@@ -171,12 +172,12 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 
                     workbook.Save();
                     MessageBox.Show("Записи успешно удалены!");
-                    LOGGER.LOG($"Удалены записи занятия с ID: {string.Join(", ", ids)}.");
+                    logger.LOG($"Удалены записи занятия с ID: {string.Join(", ", ids)}.");
                 }
                 else
                 {
                     MessageBox.Show("Ни одна из выбранных записей не найдена!");
-                    LOGGER.LOG($"Попытка удалить несуществующие записи занятий ID: {string.Join(", ", ids)}.");
+                    logger.LOG($"Попытка удалить несуществующие записи занятий ID: {string.Join(", ", ids)}.");
                 }
             }
         }

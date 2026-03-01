@@ -9,6 +9,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
 {
     public partial class ModuleADMIN : Form
     {
+        ILOGGER logger = new LOGGER();
         private string otchetPath_ = "Отчёт.xlsx";
         private string instuctorsPath_ = "Инструкторы.xlsx";
         private string studentsPath_ = "Ученики.xlsx";
@@ -97,12 +98,12 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 }
 
                 MessageBox.Show("Отчёт создан!");
-                LOGGER.LOG("Создан отчёт: " + otchetPath_);
+                logger.LOG("Создан отчёт: " + otchetPath_);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при создании отчёта:\n" + ex.Message);
-                LOGGER.LOG("Ошибка создания отчёта: " + ex.Message);
+                logger.LOG("Ошибка создания отчёта: " + ex.Message);
             }
         }
         private bool checkFiles(params string[] paths)
@@ -182,9 +183,9 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedPath = dialog.SelectedPath;
-                    LOGGER.SETLOGFOLDER(selectedPath);
+                    logger.SETLOGFOLDER(selectedPath);
                     Properties.Settings.Default.LogFolderPath = selectedPath;
-                    Properties.Settings.Default.Save();  // сохраняем настройки
+                    Properties.Settings.Default.Save();
                     MessageBox.Show($"Путь к логам изменён:\n{LOGGER.logFILEPATH_}");
                 }
             }
