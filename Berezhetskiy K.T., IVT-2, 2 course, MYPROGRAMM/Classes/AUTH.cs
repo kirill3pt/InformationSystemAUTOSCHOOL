@@ -27,7 +27,7 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
             return false;
         }
 
-        private bool AuthenticateInstructor(string login, string password)
+        public bool AuthenticateInstructor(string login, string password)
         {
             if (!File.Exists(instructorsFile))
                 return false;

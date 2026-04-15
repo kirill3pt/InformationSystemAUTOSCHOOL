@@ -7,7 +7,7 @@
     <ProjectGuid>{5AE0A74C-68F8-4AA4-AC29-09358C6AD492}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM</RootNamespace>
-    <AssemblyName>Berezhetskiy K.T., IVT-2, 2 course, MYPROGRAMM</AssemblyName>
+    <AssemblyName>AUTOSCHOOL</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -21,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>2</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -84,83 +84,83 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addCARS.cs">
+    <Compile Include="Interfaces\addCARS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addCARS.Designer.cs">
+    <Compile Include="Interfaces\addCARS.Designer.cs">
       <DependentUpon>addCARS.cs</DependentUpon>
     </Compile>
-    <Compile Include="addLESSON.cs">
+    <Compile Include="Interfaces\addLESSON.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addLESSON.Designer.cs">
+    <Compile Include="Interfaces\addLESSON.Designer.cs">
       <DependentUpon>addLESSON.cs</DependentUpon>
     </Compile>
-    <Compile Include="addSTUDENT.cs">
+    <Compile Include="Interfaces\addSTUDENT.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addSTUDENT.Designer.cs">
+    <Compile Include="Interfaces\addSTUDENT.Designer.cs">
       <DependentUpon>addSTUDENT.cs</DependentUpon>
     </Compile>
-    <Compile Include="addINSTRUCTOR.cs">
+    <Compile Include="Interfaces\addINSTRUCTOR.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addINSTRUCTOR.Designer.cs">
+    <Compile Include="Interfaces\addINSTRUCTOR.Designer.cs">
       <DependentUpon>addINSTRUCTOR.cs</DependentUpon>
     </Compile>
-    <Compile Include="AUTH.cs" />
-    <Compile Include="IAUTH.cs" />
-    <Compile Include="ILOGGER.cs" />
-    <Compile Include="LOGGER.cs" />
-    <Compile Include="ModuleINSTRUCTOR.cs">
+    <Compile Include="Classes\AUTH.cs" />
+    <Compile Include="Classes\IAUTH.cs" />
+    <Compile Include="Classes\ILOGGER.cs" />
+    <Compile Include="Classes\LOGGER.cs" />
+    <Compile Include="Interfaces\ModuleINSTRUCTOR.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuleINSTRUCTOR.Designer.cs">
+    <Compile Include="Interfaces\ModuleINSTRUCTOR.Designer.cs">
       <DependentUpon>ModuleINSTRUCTOR.cs</DependentUpon>
     </Compile>
-    <Compile Include="registerPANEL.cs">
+    <Compile Include="Interfaces\registerPANEL.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="registerPANEL.Designer.cs">
+    <Compile Include="Interfaces\registerPANEL.Designer.cs">
       <DependentUpon>registerPANEL.cs</DependentUpon>
     </Compile>
-    <Compile Include="XLSX_FUNC_CARS.cs" />
-    <Compile Include="XLSX_FUNC_INSTRUCTORS.cs" />
-    <Compile Include="XLSX_FUNC_LESSONS.cs" />
-    <Compile Include="XLSX_FUNC_STUDENTS.cs" />
-    <Compile Include="logPANEL.cs">
+    <Compile Include="Classes\XLSX_FUNC_CARS.cs" />
+    <Compile Include="Classes\XLSX_FUNC_INSTRUCTORS.cs" />
+    <Compile Include="Classes\XLSX_FUNC_LESSONS.cs" />
+    <Compile Include="Classes\XLSX_FUNC_STUDENTS.cs" />
+    <Compile Include="Interfaces\logPANEL.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="logPANEL.Designer.cs">
+    <Compile Include="Interfaces\logPANEL.Designer.cs">
       <DependentUpon>logPANEL.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuleADMIN.cs">
+    <Compile Include="Interfaces\ModuleADMIN.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuleADMIN.Designer.cs">
+    <Compile Include="Interfaces\ModuleADMIN.Designer.cs">
       <DependentUpon>ModuleADMIN.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="addCARS.resx">
+    <EmbeddedResource Include="Interfaces\addCARS.resx">
       <DependentUpon>addCARS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addINSTRUCTOR.resx">
+    <EmbeddedResource Include="Interfaces\addINSTRUCTOR.resx">
       <DependentUpon>addINSTRUCTOR.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addLESSON.resx">
+    <EmbeddedResource Include="Interfaces\addLESSON.resx">
       <DependentUpon>addLESSON.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addSTUDENT.resx">
+    <EmbeddedResource Include="Interfaces\addSTUDENT.resx">
       <DependentUpon>addSTUDENT.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="logPANEL.resx">
+    <EmbeddedResource Include="Interfaces\logPANEL.resx">
       <DependentUpon>logPANEL.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModuleADMIN.resx">
+    <EmbeddedResource Include="Interfaces\ModuleADMIN.resx">
       <DependentUpon>ModuleADMIN.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModuleINSTRUCTOR.resx">
+    <EmbeddedResource Include="Interfaces\ModuleINSTRUCTOR.resx">
       <DependentUpon>ModuleINSTRUCTOR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -172,7 +172,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="registerPANEL.resx">
+    <EmbeddedResource Include="Interfaces\registerPANEL.resx">
       <DependentUpon>registerPANEL.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

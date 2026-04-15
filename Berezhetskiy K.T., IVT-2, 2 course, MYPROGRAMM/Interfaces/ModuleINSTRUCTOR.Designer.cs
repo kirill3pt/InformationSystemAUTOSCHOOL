@@ -46,7 +46,7 @@
             // DoneBUTTON
             // 
             this.DoneBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DoneBUTTON.Location = new System.Drawing.Point(596, 421);
             this.DoneBUTTON.Name = "DoneBUTTON";
             this.DoneBUTTON.Size = new System.Drawing.Size(128, 36);
@@ -75,7 +75,7 @@
             // CancelBUTTON
             // 
             this.CancelBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CancelBUTTON.Location = new System.Drawing.Point(500, 421);
             this.CancelBUTTON.Name = "CancelBUTTON";
             this.CancelBUTTON.Size = new System.Drawing.Size(90, 36);
@@ -88,7 +88,7 @@
             // aboutTSM
             // 
             this.aboutTSM.Name = "aboutTSM";
-            this.aboutTSM.Size = new System.Drawing.Size(180, 22);
+            this.aboutTSM.Size = new System.Drawing.Size(163, 22);
             this.aboutTSM.Text = "О программе";
             this.aboutTSM.Click += new System.EventHandler(this.aboutTSM_Click);
             // 
@@ -120,7 +120,7 @@
             this.toolStripButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileTSM,
             this.helpTSM});
-            this.toolStripButton1.Font = new System.Drawing.Font("Bahnschrift Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripButton1.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
@@ -129,6 +129,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Font = new System.Drawing.Font("Bahnschrift", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.scheduleTSM});
@@ -140,7 +141,7 @@
             // 
             // scheduleTSM
             // 
-            this.scheduleTSM.Font = new System.Drawing.Font("Bahnschrift Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.scheduleTSM.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.scheduleTSM.Image = ((System.Drawing.Image)(resources.GetObject("scheduleTSM.Image")));
             this.scheduleTSM.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.scheduleTSM.Name = "scheduleTSM";

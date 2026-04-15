@@ -41,8 +41,8 @@
             // registrationBUTTON
             // 
             this.registrationBUTTON.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.registrationBUTTON.Font = new System.Drawing.Font("Bahnschrift Condensed", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.registrationBUTTON.Location = new System.Drawing.Point(79, 97);
+            this.registrationBUTTON.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.registrationBUTTON.Location = new System.Drawing.Point(100, 97);
             this.registrationBUTTON.Name = "registrationBUTTON";
             this.registrationBUTTON.Size = new System.Drawing.Size(216, 42);
             this.registrationBUTTON.TabIndex = 9;
@@ -53,20 +53,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(9, 72);
+            this.label2.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(8, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 19);
+            this.label2.Size = new System.Drawing.Size(89, 23);
             this.label2.TabIndex = 8;
             this.label2.Text = "ПАРОЛЬ:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(19, 29);
+            this.label1.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(19, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 19);
+            this.label1.Size = new System.Drawing.Size(75, 23);
             this.label1.TabIndex = 7;
             this.label1.Text = "ЛОГИН:";
             // 
@@ -77,7 +77,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.passwordBox, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.loginBox, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(79, 12);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(100, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -107,8 +107,8 @@
             // cancelBUTTON
             // 
             this.cancelBUTTON.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.cancelBUTTON.Font = new System.Drawing.Font("Bahnschrift Condensed", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cancelBUTTON.Location = new System.Drawing.Point(79, 145);
+            this.cancelBUTTON.Font = new System.Drawing.Font("Bahnschrift", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cancelBUTTON.Location = new System.Drawing.Point(100, 149);
             this.cancelBUTTON.Name = "cancelBUTTON";
             this.cancelBUTTON.Size = new System.Drawing.Size(216, 42);
             this.cancelBUTTON.TabIndex = 10;

@@ -15,7 +15,6 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
         public string StudentFIO { get; set; }
         public string NumberPhone { get; set; }
         public string Group {  get; set; }
-        public string Paid { get; set; }
 
         public addSTUDENT()
         {

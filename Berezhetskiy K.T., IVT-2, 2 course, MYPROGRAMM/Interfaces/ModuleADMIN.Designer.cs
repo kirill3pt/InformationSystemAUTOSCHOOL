@@ -57,6 +57,7 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripSplitButton1});
@@ -73,7 +74,7 @@
             this.statementTSM,
             this.serviceTSM,
             this.helpTSM});
-            this.toolStripButton1.Font = new System.Drawing.Font("Bahnschrift Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripButton1.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
@@ -85,7 +86,7 @@
             this.fileTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitTSM});
             this.fileTSM.Name = "fileTSM";
-            this.fileTSM.Size = new System.Drawing.Size(131, 22);
+            this.fileTSM.Size = new System.Drawing.Size(180, 22);
             this.fileTSM.Text = "Файл";
             // 
             // exitTSM
@@ -100,7 +101,7 @@
             this.statementTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.make_statementTSM});
             this.statementTSM.Name = "statementTSM";
-            this.statementTSM.Size = new System.Drawing.Size(131, 22);
+            this.statementTSM.Size = new System.Drawing.Size(180, 22);
             this.statementTSM.Text = "Отчёты";
             // 
             // make_statementTSM
@@ -115,7 +116,7 @@
             this.serviceTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsTSM});
             this.serviceTSM.Name = "serviceTSM";
-            this.serviceTSM.Size = new System.Drawing.Size(131, 22);
+            this.serviceTSM.Size = new System.Drawing.Size(180, 22);
             this.serviceTSM.Text = "Сервис";
             // 
             // settingsTSM
@@ -138,7 +139,7 @@
             this.helpTSM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutTSM});
             this.helpTSM.Name = "helpTSM";
-            this.helpTSM.Size = new System.Drawing.Size(131, 22);
+            this.helpTSM.Size = new System.Drawing.Size(180, 22);
             this.helpTSM.Text = "Помощь";
             // 
             // aboutTSM
@@ -155,7 +156,7 @@
             this.instructorsTSM,
             this.carsTSM,
             this.scheduleTSM});
-            this.toolStripSplitButton1.Font = new System.Drawing.Font("Bahnschrift Light", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.toolStripSplitButton1.Font = new System.Drawing.Font("Bahnschrift", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
@@ -209,7 +210,7 @@
             // CancelBUTTON
             // 
             this.CancelBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CancelBUTTON.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CancelBUTTON.Location = new System.Drawing.Point(500, 428);
             this.CancelBUTTON.Name = "CancelBUTTON";
             this.CancelBUTTON.Size = new System.Drawing.Size(90, 36);
@@ -222,7 +223,7 @@
             // DoneBUTTON
             // 
             this.DoneBUTTON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DoneBUTTON.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DoneBUTTON.Location = new System.Drawing.Point(596, 428);
             this.DoneBUTTON.Name = "DoneBUTTON";
             this.DoneBUTTON.Size = new System.Drawing.Size(128, 36);
@@ -235,7 +236,7 @@
             // buttonADD
             // 
             this.buttonADD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonADD.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonADD.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonADD.Location = new System.Drawing.Point(44, 428);
             this.buttonADD.Name = "buttonADD";
             this.buttonADD.Size = new System.Drawing.Size(90, 36);
@@ -247,7 +248,7 @@
             // buttonDELETE
             // 
             this.buttonDELETE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonDELETE.Font = new System.Drawing.Font("Bahnschrift Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDELETE.Font = new System.Drawing.Font("Bahnschrift", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonDELETE.Location = new System.Drawing.Point(140, 428);
             this.buttonDELETE.Name = "buttonDELETE";
             this.buttonDELETE.Size = new System.Drawing.Size(128, 36);
@@ -276,6 +277,7 @@
             this.Controls.Add(this.CancelBUTTON);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.toolStrip1);
+            this.Font = new System.Drawing.Font("Bahnschrift", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MaximumSize = new System.Drawing.Size(812, 527);
             this.MinimumSize = new System.Drawing.Size(812, 527);
             this.Name = "ModuleADMIN";

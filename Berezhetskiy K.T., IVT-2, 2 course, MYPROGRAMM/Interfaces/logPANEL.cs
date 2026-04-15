@@ -7,9 +7,6 @@ namespace Berezhetskiy_K.T.__IVT_2__2_course__MYPROGRAMM
     public partial class loginPanel : Form
     {
         private readonly IAUTH iauth;
-        private readonly string instructorsFile = "instructors.txt";
-        private string RightLOGINforADM = "Login";
-        private string RightPASSWORDforADM = "Password";
         public loginPanel()
         {
             InitializeComponent();
